@@ -1,0 +1,41 @@
+public Node fasterFind(int id)
+    {
+        if (this.length() != 0 && id < this.length() && id >= 0)
+        {
+            int difference = 1;
+            if (id % 50 == 0) difference = 50;
+            else if (id % 10 == 0) difference = 10;
+            else if (id % 7 == 0) difference = 7;
+            else if (id % 5 == 0) difference = 5;
+            else if (id % 4 == 0) difference = 4;
+            else if (id % 3 == 0) difference = 3;
+            else if (id % 2 == 0) difference = 2;
+
+            Node temp = this.head;
+            while (temp != null)
+            {
+                if (temp.getID() == id) break;
+
+                switch (difference) {
+                    case 50:
+                        temp = temp.getNext50x(); break;
+                    case 10:
+                        temp = temp.getNext10x(); break;
+                    case 7:
+                        temp = temp.getNext().getNext().getNext().getNext().getNext().getNext().getNext(); break;
+                    case 5:
+                        temp = temp.getNext5x(); break;
+                    case 4:
+                        temp = temp.getNext().getNext().getNext().getNext(); break;
+                    case 3:
+                        temp = temp.getNext().getNext().getNext(); break;
+                    case 2:
+                        temp = temp.getNext().getNext(); break;
+                    default:
+                        temp = temp.getNext(); break;
+                }
+            }
+            return temp;
+        }
+        return null;
+    }
